@@ -39,6 +39,20 @@ describe('LightswitchComp', () => {
     expect(comp.message).toMatch(/is off/i, 'off at first');
     comp.clicked();
     expect(comp.message).toMatch(/is on/i, 'on after clicked');
+    comp.clicked();
+    expect(comp.message).toMatch(/is off/i, 'off after clicked');
+
   });
+
+  it('#checked() should set #message2 to "is Checked"', () => {
+    const comp = new BasicComponent();
+    expect(comp.message2).toMatch(/is off/i, 'off at first');
+    comp.checked();
+    expect(comp.message2).toMatch(/is on/i, 'on after clicked');
+    comp.checked();
+    expect(comp.message2).toMatch(/is off/i, 'off after clicked');
+
+  });
+
 });
 
