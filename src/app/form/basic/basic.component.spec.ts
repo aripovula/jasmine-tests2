@@ -1,6 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { By } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from '../../app-routing.module';
+import { AppComponent } from '../../app.component';
 import { BasicComponent } from './basic.component';
+
 
 describe('BasicComponent', () => {
   let component: BasicComponent;
@@ -52,6 +59,32 @@ describe('LightswitchComp', () => {
     comp.checked();
     expect(comp.message2).toMatch(/is off/i, 'off after clicked');
 
+  });
+
+  it('should click change value', () => {
+
+    TestBed.configureTestingModule({
+      declarations: [
+        AppComponent,
+        BasicComponent
+      ],
+      imports: [
+        BrowserModule,
+        AppRoutingModule
+      ],
+      providers: [],
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(BasicComponent);
+    // const component = fixture.componentInstance;
+
+    const input = fixture.debugElement.query(By.css('#aCheckBox')).nativeElement;
+    expect(input.checked).toBeFalsy(); // default state
+
+    input.click();
+    fixture.detectChanges();
+
+    expect(input.checked).toBeTruthy(); // state after click
   });
 
 });

@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <button (click)="clicked()">Click me!</button>
     <input
+      id="aCheckBox"
       type="checkbox"
       [checked]="saveUsername"
       (change)="saveUsername = !saveUsername"
