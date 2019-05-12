@@ -61,7 +61,7 @@ describe('LightswitchComp', () => {
 
   });
 
-  it('should click change value', () => {
+  it('should click checkbox and change its value', () => {
 
     TestBed.configureTestingModule({
       declarations: [
@@ -85,6 +85,34 @@ describe('LightswitchComp', () => {
     fixture.detectChanges();
 
     expect(input.checked).toBeTruthy(); // state after click
+  });
+
+
+  it('should change value of text input field', () => {
+
+    TestBed.configureTestingModule({
+      declarations: [
+        AppComponent,
+        BasicComponent
+      ],
+      imports: [
+        BrowserModule,
+        AppRoutingModule
+      ],
+      providers: [],
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(BasicComponent);
+    // const component = fixture.componentInstance;
+
+    const el = fixture.debugElement.query(By.css('#aText')).nativeElement;
+
+    expect(el.value).toBe('');
+
+    el.value = 'someValue';
+    el.dispatchEvent(new Event('aText'));
+
+    expect(el.value).toBe('someValue');
   });
 
 });

@@ -10,6 +10,13 @@ import { Component, OnInit } from '@angular/core';
       [checked]="saveUsername"
       (change)="saveUsername = !saveUsername"
     />
+    <input
+      id="aText"
+      type="text"
+      value=""
+      (change)="textEdited"
+    />
+
     <div><span>{{message}}</span><span>{{message}}</span></div>`,
   styleUrls: ['./basic.component.css']
 })
@@ -17,12 +24,14 @@ import { Component, OnInit } from '@angular/core';
 export class BasicComponent implements OnInit {
   isOn = false;
   isChecked = false;
+  text = '';
   constructor() { }
 
   ngOnInit() {
   }
   clicked() { this.isOn = !this.isOn; }
   checked() { this.isChecked = !this.isChecked; }
+  textEdited() { this.isOn = !this.isOn; }
   get message() { return `The light is ${this.isOn ? 'On' : 'Off'}`; }
   get message2() { return `The light is ${this.isChecked ? 'On' : 'Off'}`; }
 }
