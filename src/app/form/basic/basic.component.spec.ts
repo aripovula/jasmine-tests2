@@ -31,7 +31,7 @@ describe('BasicComponent', () => {
   });
 });
 
-describe('LightswitchComp', () => {
+describe('BasicComponent without TestBed', () => {
   it('#clicked() should toggle #isOn', () => {
     const comp = new BasicComponent();
     expect(comp.isOn).toBe(false, 'off at first');
@@ -60,24 +60,23 @@ describe('LightswitchComp', () => {
     expect(comp.message2).toMatch(/is off/i, 'off after clicked');
 
   });
+});
+
+
+describe('BasicComponent with TestBed', () => {
+  let fixture;
+
+  beforeEach(async(() => {
+    configureTestingMod();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(BasicComponent);
+  });
 
   it('should click checkbox and change its value', () => {
 
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent,
-        BasicComponent
-      ],
-      imports: [
-        BrowserModule,
-        AppRoutingModule
-      ],
-      providers: [],
-    }).compileComponents();
-
-    const fixture = TestBed.createComponent(BasicComponent);
     // const component = fixture.componentInstance;
-
     const input = fixture.debugElement.query(By.css('#aCheckBox')).nativeElement;
     expect(input.checked).toBeFalsy(); // default state
 
@@ -90,19 +89,7 @@ describe('LightswitchComp', () => {
 
   it('should change value of text input field', () => {
 
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent,
-        BasicComponent
-      ],
-      imports: [
-        BrowserModule,
-        AppRoutingModule
-      ],
-      providers: [],
-    }).compileComponents();
-
-    const fixture = TestBed.createComponent(BasicComponent);
+    fixture = TestBed.createComponent(BasicComponent);
     // const component = fixture.componentInstance;
 
     const el = fixture.debugElement.query(By.css('#aText')).nativeElement;
@@ -117,3 +104,16 @@ describe('LightswitchComp', () => {
 
 });
 
+const configureTestingMod = ()  => {
+  TestBed.configureTestingModule({
+    declarations: [
+      AppComponent,
+      BasicComponent
+    ],
+    imports: [
+      BrowserModule,
+      AppRoutingModule
+    ],
+    providers: [],
+  }).compileComponents();
+};
